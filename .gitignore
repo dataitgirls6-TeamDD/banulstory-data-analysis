@@ -1,0 +1,3 @@
+# 주피터노트북에서 autosave를 위해 사용되는 폴더인 ipynb_checkpoints gitignore에 추가
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*.ipynb_checkpoints

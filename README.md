@@ -1,5 +1,6 @@
 <div align="center">
-<h1><img width="100" src="https://user-images.githubusercontent.com/109563978/202606766-4fd8bf46-c356-4149-85b0-f4f4599edd41.gif">TeamDD</h1> <br>
+<h1><img width="50" src="https://user-images.githubusercontent.com/109563978/202606766-4fd8bf46-c356-4149-85b0-f4f4599edd41.gif">TeamDD</h1>
+  <img width="50" src="https://user-images.githubusercontent.com/109563978/202608578-ecaee161-2149-4575-9c56-fd44e6680887.png"><br>
 <h2>신입 데이터 분석가 DD의 <br> 이커머스 데이터 분석기(feat.banul) </h2>
 </div>
 

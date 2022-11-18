@@ -1,6 +1,6 @@
 <div align="center">
 <h1><img src="https://user-images.githubusercontent.com/109563978/202606766-4fd8bf46-c356-4149-85b0-f4f4599edd41.gif">TeamDD</h1> <hr>
-<h2>신입 데이터 분석가 DD의 <hr> 이커머스 데이터 분석기(feat.banul) </h2>
+<h2>신입 데이터 분석가 DD의 <br> 이커머스 데이터 분석기(feat.banul) </h2>
 </div>
 
 <b>팀원</b>: 김남이, 김지성, 김하나, 김혜원, 이현정, 인지원, 최지현

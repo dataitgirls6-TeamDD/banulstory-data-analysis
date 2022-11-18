@@ -10,13 +10,15 @@
 
 
 ## 프로젝트 개요
+신입 데이터 분석가가 된 DD! 이커머스 기업에 입사후, 데이터를 분석하는 과정과 데이터 분석을 활용할 수 있는 방안을 제안합니다.
 
 ## 폴더 설명
 1. Web Scrapping
 - 리뷰 웹 스크래핑(크롤링) 코드
 
 2. Preprocessing
-- 데이터 전처리 관련 코드
+- ERP와 Review 데이터 전처리 관련 코드
 
-3. Visualization
--
+3. Analysis 
+- ERP sql 코드
+- Review 분석 코드

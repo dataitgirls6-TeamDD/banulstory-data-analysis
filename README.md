@@ -1,9 +1,9 @@
 <div align="center">
 <h1><img width="80" src="https://user-images.githubusercontent.com/109563978/202606766-4fd8bf46-c356-4149-85b0-f4f4599edd41.gif">TeamDD
   <img width="30" src="https://user-images.githubusercontent.com/109563978/202608578-ecaee161-2149-4575-9c56-fd44e6680887.png"></h1>
-  <a href ="https://www.canva.com/design/DAFQ4hdGjQM/5TgHg47QPbuZ3uuCLd4C5A/view"
+<a href ="https://www.canva.com/design/DAFQ4hdGjQM/5TgHg47QPbuZ3uuCLd4C5A/view"
   <img width="80%" src="https://user-images.githubusercontent.com/104474847/202966498-6305f831-5fd7-4f42-8cc1-19da648baac2.png">
-  </a>
+</a>
 <br>
 <b>팀원</b>: 김남이, 김지성, 김하나, 김혜원, 이현정, 인지원, 최지현
 </div>

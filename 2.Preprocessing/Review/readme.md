@@ -17,10 +17,11 @@
     : pink, red, orange, brown, yellow, green, blue, violet, black, white, gray, beige, mint, navy, mixed
     
 - total_review에서 색상 분류, vlookup 이용하여 채워넣기(excel)
-    (1) total_review의 color에서 글자만 추출(VBA 사용)
-    (2) 추출된 색상 텍스트 중복 제거
-    (3) 중복 제거된 색상에 대분류 색상 정하기
-    (4) vlookup으로 모든 컬러에 대분류 색상 채워넣기
+    </br>
+    (1) total_review의 color에서 글자만 추출(VBA 사용)</br>
+    (2) 추출된 색상 텍스트 중복 제거</br>
+    (3) 중복 제거된 색상에 대분류 색상 정하기</br>
+    (4) vlookup으로 모든 컬러에 대분류 색상 채워넣기</br>
     (5) 컬러 레이블링 각자 분량 나눠서 다시 확인, 분류
 
 ### 3) 날짜 타입 변경

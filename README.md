@@ -21,3 +21,6 @@
 3. Analysis 
 - ERP sql 코드
 - Review 분석 코드
+
+4. Presentation
+- Team DD 발표 자료.pdf

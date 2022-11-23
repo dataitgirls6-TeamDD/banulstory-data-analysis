@@ -13,7 +13,7 @@
 
 ## 📂 폴더 설명
 1. Web Scrapping
-- 리뷰 웹 스크래핑(크롤링) 코드</br>
+- 리뷰 웹 스크래핑(크롤링) 코드
 
 2. Preprocessing
 - ERP와 Review 데이터 전처리 관련 코드

@@ -1,28 +1,41 @@
-/*전국 지역별 매출*/
+/* 결제취소를 한 상품들*/
 
-/*지역별 매출 1위: 경기도*/
-SELECT region1
-    , SUM(total_price) AS sum_total_price
-FROM (
-  SELECT address  
-    , REGEXP_SUBSTR(address, r"^(.+?) ") as region1 /*가장 큰 지역구분: 서울, 경기, ...*/
-    , REGEXP_SUBSTR(address, '\\s[가-힣]+[시|군|구] ') as region2 /*그 다음 큰 지역구분: 시, 군, 구*/
-    , total_price
-  FROM `banulstory.banulstory.orders`
-      ) AS region
-GROUP BY region1
-ORDER BY 2 DESC; 
+--사은품(999)를 제외하고, total_price=0(결제 취소된 제품들)인 칼럼들
+WITH
+X AS(
+SELECT *
+FROM `banulstory.orders`
+WHERE total_price=0 AND category != "999"
+) --총 148861행
 
-/*경기도 내 매출 비교: 고양시가 1위*/
-SELECT region2
-    , SUM(total_price) AS sum_total_price
-FROM (
-  SELECT address  
-    , REGEXP_SUBSTR(address, r"^(.+?) ") as region1 /*가장 큰 지역구분: 서울, 경기, ...*/
-    , REGEXP_SUBSTR(address, '\\s[가-힣]+[시|군|구] ') as region2 /*그 다음 큰 지역구분: 시, 군, 구*/
-    , total_price
-  FROM `banulstory.banulstory.orders`
-      ) AS region
-WHERE region1 = "경기"
-GROUP BY region2
-ORDER BY 2 DESC; 
+--결제 취소한 주문건들의 회원 나이대
+SELECT ageband, COUNT(ageband) count
+FROM X
+LEFT JOIN `banulstory.customers`B
+ON X.id = B.id
+GROUP BY 1
+ORDER BY 2 DESC;
+
+--결제 취소한 주문 상품들
+WITH
+X AS(
+SELECT *
+FROM `banulstory.orders`
+WHERE total_price=0 AND category != "999"
+) --총 148861행
+SELECT product_name, COUNT(product_name) count
+FROM X
+GROUP BY 1
+ORDER BY 2 DESC;
+
+--결제취소한 시간대
+WITH
+X AS(
+SELECT *
+FROM `banulstory.orders`
+WHERE total_price=0 AND category != "999"
+) --총 148861행
+SELECT EXTRACT(TIME FROM order_date), COUNT(EXTRACT(TIME FROM order_date))
+FROM X
+GROUP BY 1
+ORDER BY 2 DESC;

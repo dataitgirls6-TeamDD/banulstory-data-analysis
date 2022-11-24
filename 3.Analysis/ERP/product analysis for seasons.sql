@@ -1,28 +1,70 @@
-/*전국 지역별 매출*/
+/*계절 별 많이 팔리는 상품*/
+--패키지만 뽑는 임시테이블
+WITH 
+Package AS(
+  SELECT *
+  FROM `banulstory.orders`A
+  LEFT JOIN `banulstory.category`B
+  ON A.category = B.category
+  WHERE category_group LIKE '%패키지%' AND total_price>0
+)
+-- 봄 시즌 
+SELECT product_name, COUNT(product_name)
+FROM Package
+WHERE EXTRACT(MONTH from order_date) = 3
+  OR EXTRACT(MONTH from order_date) = 4
+  OR EXTRACT(MONTH from order_date) = 5
+GROUP BY 1
+ORDER BY 2 DESC;
 
-/*지역별 매출 1위: 경기도*/
-SELECT region1
-    , SUM(total_price) AS sum_total_price
-FROM (
-  SELECT address  
-    , REGEXP_SUBSTR(address, r"^(.+?) ") as region1 /*가장 큰 지역구분: 서울, 경기, ...*/
-    , REGEXP_SUBSTR(address, '\\s[가-힣]+[시|군|구] ') as region2 /*그 다음 큰 지역구분: 시, 군, 구*/
-    , total_price
-  FROM `banulstory.banulstory.orders`
-      ) AS region
-GROUP BY region1
-ORDER BY 2 DESC; 
+WITH 
+Package AS(
+  SELECT *
+  FROM `banulstory.orders`A
+  LEFT JOIN `banulstory.category`B
+  ON A.category = B.category
+  WHERE category_group LIKE '%패키지%' AND total_price>0
+)
+-- 여름 시즌 
+SELECT product_name, COUNT(product_name)
+FROM Package
+WHERE EXTRACT(MONTH from order_date) = 6
+  OR EXTRACT(MONTH from order_date) = 7
+  OR EXTRACT(MONTH from order_date) = 8
+GROUP BY 1
+ORDER BY 2 DESC;
 
-/*경기도 내 매출 비교: 고양시가 1위*/
-SELECT region2
-    , SUM(total_price) AS sum_total_price
-FROM (
-  SELECT address  
-    , REGEXP_SUBSTR(address, r"^(.+?) ") as region1 /*가장 큰 지역구분: 서울, 경기, ...*/
-    , REGEXP_SUBSTR(address, '\\s[가-힣]+[시|군|구] ') as region2 /*그 다음 큰 지역구분: 시, 군, 구*/
-    , total_price
-  FROM `banulstory.banulstory.orders`
-      ) AS region
-WHERE region1 = "경기"
-GROUP BY region2
-ORDER BY 2 DESC; 
+WITH 
+Package AS(
+  SELECT *
+  FROM `banulstory.orders`A
+  LEFT JOIN `banulstory.category`B
+  ON A.category = B.category
+  WHERE category_group LIKE '%패키지%' AND total_price>0
+)
+-- 가을 시즌 
+SELECT product_name, COUNT(product_name)
+FROM Package
+WHERE EXTRACT(MONTH from order_date) = 9
+  OR EXTRACT(MONTH from order_date) = 10
+  OR EXTRACT(MONTH from order_date) = 11
+GROUP BY 1
+ORDER BY 2 DESC;
+
+
+WITH 
+Package AS(
+  SELECT *
+  FROM `banulstory.orders`A
+  LEFT JOIN `banulstory.category`B
+  ON A.category = B.category
+  WHERE category_group LIKE '%패키지%' AND total_price>0
+)
+-- 겨울 시즌 
+SELECT product_name, COUNT(product_name)
+FROM Package
+WHERE EXTRACT(MONTH from order_date) = 12
+  OR EXTRACT(MONTH from order_date) = 1
+  OR EXTRACT(MONTH from order_date) = 2
+GROUP BY 1
+ORDER BY 2 DESC;

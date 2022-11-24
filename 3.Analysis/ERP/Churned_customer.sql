@@ -1,28 +1,53 @@
-/*전국 지역별 매출*/
+--이탈률
+SELECT id, MAX(order_date) MX_ORDER
+FROM `banulstory.banulstory.orders`
+GROUP BY 1;
 
-/*지역별 매출 1위: 경기도*/
-SELECT region1
-    , SUM(total_price) AS sum_total_price
-FROM (
-  SELECT address  
-    , REGEXP_SUBSTR(address, r"^(.+?) ") as region1 /*가장 큰 지역구분: 서울, 경기, ...*/
-    , REGEXP_SUBSTR(address, '\\s[가-힣]+[시|군|구] ') as region2 /*그 다음 큰 지역구분: 시, 군, 구*/
-    , total_price
-  FROM `banulstory.banulstory.orders`
-      ) AS region
-GROUP BY region1
-ORDER BY 2 DESC; 
+-- 이탈률(이탈을 90일로 봤을 때)
+SELECT CASE WHEN DIFF >= 90 THEN 'CHURN' ELSE 'NON-CHURN' END CHURN_TYPE,
+COUNT(DISTINCT id) N_CUS
+FROM
+(SELECT id,
+MX_ORDER,
+DATE_DIFF("2022-11-03",DATE (MX_ORDER), DAY) DIFF
+FROM
+(SELECT id,
+MAX(order_date) MX_ORDER
+FROM `banulstory.orders`
+GROUP BY 1) BASE) BASE
+GROUP BY 1
+;
 
-/*경기도 내 매출 비교: 고양시가 1위*/
-SELECT region2
-    , SUM(total_price) AS sum_total_price
-FROM (
-  SELECT address  
-    , REGEXP_SUBSTR(address, r"^(.+?) ") as region1 /*가장 큰 지역구분: 서울, 경기, ...*/
-    , REGEXP_SUBSTR(address, '\\s[가-힣]+[시|군|구] ') as region2 /*그 다음 큰 지역구분: 시, 군, 구*/
-    , total_price
-  FROM `banulstory.banulstory.orders`
-      ) AS region
-WHERE region1 = "경기"
-GROUP BY region2
-ORDER BY 2 DESC; 
+--고객 별 churn table 생성
+CREATE TABLE banulstory.CHURN_LIST AS
+SELECT CASE WHEN DIFF >= 90 THEN 'CHURN' ELSE 'NON-CHURN' END CHURN_TYPE,
+id
+FROM
+(SELECT id,
+MX_ORDER,
+'2022-11-03' END_POINT,
+DATE_DIFF(DATE '2022-11-03',DATE (MX_ORDER), DAY) DIFF
+FROM
+(SELECT id,
+MAX(order_date) MX_ORDER
+FROM `banulstory.orders`
+GROUP
+BY 1) BASE) BASE
+;
+
+--이탈과 카테고리 비교
+SELECT B.CHURN_TYPE,
+C.category_group,
+COUNT(DISTINCT A.id) BU
+FROM banulstory.orders A
+LEFT
+JOIN `banulstory.category` C
+ON A.category = C.category
+LEFT
+JOIN banulstory.CHURN_LIST B
+ON B.id = A.id
+GROUP
+BY 1,2
+ORDER
+BY 1,3 DESC
+;

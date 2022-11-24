@@ -5,7 +5,7 @@
   <img width="80%" src="https://user-images.githubusercontent.com/104474847/202966498-6305f831-5fd7-4f42-8cc1-19da648baac2.png">
 </a>
 <br>
-🔗 링크를 누르면 PPT 자료로 넘어갑니다. <br>
+🔗 썸네일을 누르면 PPT 자료로 넘어갑니다. <br>
 <b>팀원</b>: 김남이, 김지성, 김하나, 김혜원, 이현정, 인지원, 최지현
 
 </div>

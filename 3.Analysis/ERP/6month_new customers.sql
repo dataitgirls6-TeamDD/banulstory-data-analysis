@@ -1,28 +1,38 @@
-/*전국 지역별 매출*/
+# order_id 중복제거한 상태에서 2021 신규회원수 구하기
+WITH
+sale_table AS(
+  SELECT DISTINCT order_id
+        , cnt_orders
+        , DATE(order_date) AS order_date
+  FROM `banulstory.orders`
+)
+SELECT order_date, COUNT(*) AS new_customers_2021
+FROM sale_table
+WHERE order_date BETWEEN '2021-04-01' AND '2021-10-31'
+AND cnt_orders = 0
+GROUP BY order_date
+ORDER BY 1
 
-/*지역별 매출 1위: 경기도*/
-SELECT region1
-    , SUM(total_price) AS sum_total_price
-FROM (
-  SELECT address  
-    , REGEXP_SUBSTR(address, r"^(.+?) ") as region1 /*가장 큰 지역구분: 서울, 경기, ...*/
-    , REGEXP_SUBSTR(address, '\\s[가-힣]+[시|군|구] ') as region2 /*그 다음 큰 지역구분: 시, 군, 구*/
-    , total_price
-  FROM `banulstory.banulstory.orders`
-      ) AS region
-GROUP BY region1
-ORDER BY 2 DESC; 
+# order_id 중복제거한 상태에서 2022 신규회원수 구하기
+WITH
+sale_table AS(
+  SELECT DISTINCT order_id
+        , cnt_orders
+        , DATE(order_date) AS order_date
+  FROM `banulstory.orders`
+)
+SELECT order_date, COUNT(*) AS new_customers_2022
+FROM sale_table
+WHERE order_date BETWEEN '2022-04-01' AND '2022-10-31'
+AND cnt_orders = 0
+GROUP BY order_date
+ORDER BY 1
 
-/*경기도 내 매출 비교: 고양시가 1위*/
-SELECT region2
-    , SUM(total_price) AS sum_total_price
-FROM (
-  SELECT address  
-    , REGEXP_SUBSTR(address, r"^(.+?) ") as region1 /*가장 큰 지역구분: 서울, 경기, ...*/
-    , REGEXP_SUBSTR(address, '\\s[가-힣]+[시|군|구] ') as region2 /*그 다음 큰 지역구분: 시, 군, 구*/
-    , total_price
-  FROM `banulstory.banulstory.orders`
-      ) AS region
-WHERE region1 = "경기"
-GROUP BY region2
-ORDER BY 2 DESC; 
+-- SELECT *
+-- FROM `banulstory.orders`
+-- WHERE order_status NOT IN ('입금후 취소완료-환불완료','반품완료-환불완료','반품완료-환불전','입금후 취소완료','입금후 취소완료-환불접수','입금후 취소완료-환불전','배송전교환 취소완료-환불완료','반품완료','반품요청-구매자','반품완료-환불접수','')
+
+
+SELECT DISTINCT order_status
+FROM `banulstory.orders`
+
